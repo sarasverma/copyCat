@@ -2,9 +2,13 @@ import React, { useRef } from "react";
 import logo from "../assets/logo.png";
 import { ImCross } from "react-icons/im";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const location = useLocation();
   const navLinks = useRef(null);
+
+  if (location.pathname === "/auth") return <></>;
 
   return (
     <nav className="flex justify-between items-center h-16 px-16 max-sm:px-8">
@@ -17,16 +21,16 @@ const Navbar = () => {
       >
         <ul className="flex gap-5 max-sm:flex-col max-sm:items-center max-sm:justify-center">
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/">About</a>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <a href="/">Services</a>
+            <Link to="/services">Services</Link>
           </li>
           <li>
-            <a href="/">Login</a>
+            <Link to="/auth">Login</Link>
           </li>
         </ul>
         <button
