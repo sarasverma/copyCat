@@ -11,13 +11,13 @@ const Navbar = () => {
   if (location.pathname === "/auth") return <></>;
 
   return (
-    <nav className="flex justify-between items-center h-16 px-16 max-sm:px-8">
+    <nav className="flex justify-between items-center h-16 px-16 max-sm:px-8 sticky bg-slate-400 max-sm:z-50">
       <div className="logo">
         <img src={logo} alt="logo" className="w-8 aspect-square" />
       </div>
       <div
         ref={navLinks}
-        className="nav-links max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-[100%] max-sm:h-[100%] max-sm:grid max-sm:place-items-center transition-[transform] duration-[0.5s] max-sm:translate-x-[-100vw] max-sm:bg-orange-500	"
+        className="nav-links max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-[100%] max-sm:h-[100%] max-sm:grid max-sm:place-items-center transition-[transform] duration-[0.5s] max-sm:translate-x-[-100vw] max-sm:bg-orange-500"
       >
         <ul className="flex gap-5 max-sm:flex-col max-sm:items-center max-sm:justify-center">
           <li>
