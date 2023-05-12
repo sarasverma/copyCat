@@ -1,7 +1,7 @@
 import React from "react";
 
 const DocView = () => {
-  return <div></div>;
+  return <div className="text-center">Not yet Implemented</div>;
 };
 
 export default DocView;

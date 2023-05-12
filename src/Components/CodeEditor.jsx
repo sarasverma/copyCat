@@ -8,9 +8,8 @@ const CodeEditor = () => {
         height="70vh"
         defaultLanguage="javascript"
         defaultValue="// put your code here"
-        theme="vs-dark"
+        // theme="vs-dark"
       />
-      ;
     </div>
   );
 };

@@ -1,29 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import RadioButton from "../Components/RadioButton";
+import TextView from "../Components/TextView";
+import ImageView from "../Components/ImageView";
+import DocView from "../Components/DocView";
 import CodeEditor from "../Components/CodeEditor";
 
 const Home = () => {
-  return (
-    <div className="px-24 pt-12 max-sm:px-2 flex justify-center">
-      <div className="w-full max-sm:w-[95%]">
-        <div className="types">
-          <input
-            type="radio"
-            name="type"
-            id="text"
-            value="text"
-            className="outline-none"
-          />
-          <input type="radio" name="type" id="image" value="image" />
-          <input type="radio" name="type" id="document" value="document" />
-          <input type="radio" name="type" id="code" value="code" />
-        </div>
+  const [type, setType] = useState("text");
 
-        <div className="thing">
-          <CodeEditor />
+  return (
+    <div className="mx-24 mt-12 p-2 max-md:mx-10 max-sm:mx-2 flex justify-center bg-red-200 rounded-md overflow-x-hidden">
+      <div className="w-full">
+        <RadioButton type={type} setType={setType} />
+        <div className="viewSelectedType">
+          <ViewSelectedType type={type} />
         </div>
       </div>
     </div>
   );
+};
+
+const ViewSelectedType = ({ type }) => {
+  if (type === "text") return <TextView />;
+  else if (type === "image") return <ImageView />;
+  else if (type === "document") return <DocView />;
+  else if (type === "code") return <CodeEditor />;
+  else return <div>Error</div>;
 };
 
 export default Home;

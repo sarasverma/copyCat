@@ -7,6 +7,11 @@ const Auth = () => {
   const register = useRef(null);
   const login = useRef(null);
 
+  const toogleForms = () => {
+    register.current.classList.toggle("hidden");
+    login.current.classList.toggle("hidden");
+  };
+
   return (
     <div
       className="grid place-items-center antialiased w-[100dvw] h-[100dvh] bg-no-repeat bg-cover bg-center"
@@ -14,11 +19,18 @@ const Auth = () => {
         backgroundImage: `url(${bg1})`,
       }}
     >
-      {/* <div ref={register}>
-        <Register />
-      </div> */}
-      <div ref={login}>
-        <Login />
+      <div
+        ref={register}
+        className="max-sm:px-2 max-sm:w-full transition-[display] duration-[0.5s] hidden"
+      >
+        <Register toogleForms={toogleForms} />
+      </div>
+
+      <div
+        ref={login}
+        className="max-sm:px-2 max-sm:w-full transition-[display] duration-[0.5s]"
+      >
+        <Login toogleForms={toogleForms} />
       </div>
     </div>
   );
