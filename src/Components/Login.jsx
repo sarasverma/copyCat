@@ -1,11 +1,36 @@
-import React from "react";
-import { FaUser } from "react-icons/fa";
-import { SiMinutemailer } from "react-icons/si";
-import { TbPassword } from "react-icons/tb";
+import React, { useState } from 'react';
+import { SiMinutemailer } from 'react-icons/si';
+import { TbPassword } from 'react-icons/tb';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ toogleForms }) => {
+  const navigate = useNavigate();
+  const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
+
+  const onChangeLogin = (e) => {
+    setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const { email, password } = loginInfo;
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+
+      alert(`Welcome back ${user.displayName} 😊`);
+      navigate('/');
+    } catch (e) {
+      console.log(`Error authenticating user: ${e}`);
+    }
+  };
+
   return (
-    <form className="py-10 px-5 w-[500px] flex flex-col gap-6 rounded-xl max-sm:w-[100%] text-white text-xl bg-orange-200  bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-100">
+    <form
+      onSubmit={handleLogin}
+      className="py-10 px-5 w-[500px] flex flex-col gap-6 rounded-xl max-sm:w-[100%] text-white text-xl bg-orange-200  bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-100">
       <div className="info text-center">
         <h1 className="text-center">Welcome 😼</h1>
         <p className="text-sm">
@@ -15,9 +40,8 @@ const Login = ({ toogleForms }) => {
             onClick={(e) => {
               e.preventDefault();
               toogleForms();
-            }}
-          >
-            {" "}
+            }}>
+            {' '}
             Register
           </button>
         </p>
@@ -27,7 +51,10 @@ const Login = ({ toogleForms }) => {
         <input
           type="email"
           placeholder="Email"
+          name="email"
+          onChange={onChangeLogin}
           autoComplete="on"
+          required
           className="px-10 py-2.5 w-full bg-transparent focus:border-b-2 border-orange-500 outline-none placeholder:text-white"
         />
       </div>
@@ -36,7 +63,10 @@ const Login = ({ toogleForms }) => {
         <input
           type="password"
           placeholder="Password"
+          name="password"
+          onChange={onChangeLogin}
           autoComplete="on"
+          required
           className="px-10 py-2.5 w-full bg-transparent focus:border-b-2 border-orange-500 outline-none placeholder:text-white"
         />
       </div>
