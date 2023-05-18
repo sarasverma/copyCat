@@ -1,13 +1,15 @@
 import React from "react";
 
-const TextView = () => {
+const TextView = ({ content, setContent }) => {
   return (
     <div>
       <textarea
         className="w-full px-1 py-1"
-        // value={text}
-        // onChange={onchangeHandler}
-        rows="25"
+        value={content.text}
+        onChange={(e) => {
+          setContent({ ...content, text: e.target.value });
+        }}
+        rows="20"
       ></textarea>
     </div>
   );
