@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
   return (
-    <div className="fixed w-[100dvw] h-[100dvh] grid place-items-center mt-[-50px]">
+    <div className="w-full flex justify-center mt-[150px]">
       <div>
         <img
           src="https://media.tenor.com/qqnxNXtPB0gAAAAd/oh-cat.gif"

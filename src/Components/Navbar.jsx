@@ -37,7 +37,16 @@ const Navbar = () => {
         <ul className="flex gap-5 max-sm:flex-col max-sm:items-center max-sm:justify-center">
           <li>
             <Link to="/" onClick={handleCloseNav} className="max-sm:text-2xl">
-              Home
+              Add
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/fetch"
+              onClick={handleCloseNav}
+              className="max-sm:text-2xl"
+            >
+              Fetch
             </Link>
           </li>
           <li>
@@ -47,15 +56,6 @@ const Navbar = () => {
               className="max-sm:text-2xl"
             >
               About
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/services"
-              onClick={handleCloseNav}
-              className="max-sm:text-2xl"
-            >
-              Services
             </Link>
           </li>
           {currentUser === null ? (
