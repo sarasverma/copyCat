@@ -11,7 +11,7 @@ const Home = ({}) => {
     text: "",
     images: [],
     documents: [],
-    code: { lang: "", code: "" },
+    code: { lang: "javascript", code: "" },
   });
 
   return (

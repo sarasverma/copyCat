@@ -5,7 +5,10 @@ const DocView = ({ content, setContent }) => {
   const handleFileSelect = (event) => {
     const files = event.target.files;
     Array.from(files).forEach((file) => {
-      setContent({ ...content, documents: [...content.documents, file] });
+      setContent((prevContent) => ({
+        ...prevContent,
+        documents: [...prevContent.documents, file],
+      }));
     });
   };
 

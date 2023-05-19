@@ -35,6 +35,10 @@ const CodeEditor = ({ content, setContent }) => {
           className="px-2 py-[2px]"
           onChange={(e) => {
             setLanguage(e.target.value);
+            setContent({
+              ...content,
+              code: { ...content.code, lang: e.target.value },
+            });
           }}
         >
           {langs.map((language) => (

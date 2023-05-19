@@ -10,13 +10,13 @@ const ImageView = ({ content, setContent }) => {
 
       reader.onload = (e) => {
         // e.target.result
-        setContent({
-          ...content,
+        setContent((prevContent) => ({
+          ...prevContent,
           images: [
-            ...content.images,
+            ...prevContent.images,
             { image: file, thumbnail: e.target.result },
           ],
-        });
+        }));
       };
       reader.readAsDataURL(file);
     });
