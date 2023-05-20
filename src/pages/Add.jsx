@@ -8,6 +8,8 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../Components/Loader";
 
 const Add = ({}) => {
   const [type, setType] = useState("text");
@@ -18,10 +20,14 @@ const Add = ({}) => {
     code: { lang: "javascript", code: "" },
   });
   const [clipId, setClipId] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     console.log(content);
+
+    setLoading(true);
     const { text, images, documents, code } = content;
 
     let fileUrls = [],
@@ -31,7 +37,7 @@ const Add = ({}) => {
       // check clipid already exist
       const res = await getDoc(doc(db, "tempStorage", clipId));
       if (res.exists()) {
-        alert("This clipId already exists 🙀");
+        toast.error("This clipId already exists 🙀");
       } else {
         const storageRef = ref(storage, clipId);
 
@@ -65,54 +71,62 @@ const Add = ({}) => {
           documents: fileUrls,
         });
 
-        alert("Your clipboard is now available. 😼");
+        toast.success("Your clipboard is now available. 😼");
 
         // navigate to the site
+        setLoading(false);
         navigate(`/fetch/${clipId}`);
       }
     } catch (error) {
-      console.log(`Error 🙀: ${error}`);
+      setLoading(false);
+      toast.error(`Error 🙀: ${error}`);
     }
   };
 
   return (
-    <div className="mx-24 mt-12 p-2 max-md:mx-10 max-sm:mx-2 flex justify-center bg-red-200 rounded-md overflow-x-hidden">
-      <div className="w-full">
-        <RadioButton type={type} setType={setType} />
+    <>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="mx-24 mt-12 p-2 max-md:mx-10 max-sm:mx-2 flex justify-center bg-red-200 rounded-md overflow-x-hidden">
+          <div className="w-full">
+            <RadioButton type={type} setType={setType} />
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-          className="submit flex gap-1 justify-end mb-2 flex-wrap"
-        >
-          <input
-            type="text"
-            placeholder="clipId"
-            className="px-1 rounded-xl"
-            onChange={(e) => {
-              setClipId(e.target.value);
-            }}
-            required
-          />
-          <button
-            type="submit"
-            className="px-2.5 py-1.5 bg-orange-500 rounded-xl"
-          >
-            Submit
-          </button>
-        </form>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+              className="submit flex gap-1 justify-end mb-2 flex-wrap"
+            >
+              <input
+                type="text"
+                placeholder="clipId"
+                className="px-1 rounded-xl"
+                onChange={(e) => {
+                  setClipId(e.target.value);
+                }}
+                required
+              />
+              <button
+                type="submit"
+                className="px-2.5 py-1.5 bg-orange-500 rounded-xl"
+              >
+                Submit
+              </button>
+            </form>
 
-        <div className="viewSelectedType">
-          <ViewSelectedType
-            type={type}
-            content={content}
-            setContent={setContent}
-          />
+            <div className="viewSelectedType">
+              <ViewSelectedType
+                type={type}
+                content={content}
+                setContent={setContent}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

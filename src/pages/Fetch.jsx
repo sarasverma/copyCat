@@ -8,9 +8,12 @@ import TextView from "../Components/TextView";
 import ImageView from "../Components/ImageView";
 import DocView from "../Components/DocView";
 import CodeEditor from "../Components/CodeEditor";
+import { toast } from "react-toastify";
+import Loader from "../Components/Loader";
 
 const Fetch = () => {
   const [record, setRecord] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { clipId } = useParams();
 
@@ -21,16 +24,18 @@ const Fetch = () => {
   }, []);
 
   const handleFetch = async (id) => {
+    setLoading(true);
     const res = await getDoc(doc(db, "tempStorage", id));
     if (res.exists()) {
       // do something
       if (clipId != id) navigate(`/fetch/${id}`);
       setRecord(res.data());
-      alert("Successfully fetched your clips! ✨");
+      toast.success("Successfully fetched ✨");
     } else {
       setRecord({});
-      alert("Clip doesn't exists 🙀");
+      toast.error("Clip doesn't exists 🙀");
     }
+    setLoading(false);
   };
 
   return (
@@ -38,7 +43,11 @@ const Fetch = () => {
       <div>
         <Search handleFetch={handleFetch} />
       </div>
-      <FetchResult clipId={clipId} record={record} setRecord={setRecord} />
+      {loading ? (
+        <Loader loading={loading} />
+      ) : (
+        <FetchResult clipId={clipId} record={record} setRecord={setRecord} />
+      )}
     </>
   );
 };
@@ -66,7 +75,7 @@ const FetchResult = ({ record, clipId, setRecord }) => {
   } else if (!clipId) {
     return <></>;
   } else {
-    return <p className="text-3xl mt-4">No clip found</p>;
+    return <p className="text-3xl text-center mt-4">No clip found</p>;
   }
 };
 

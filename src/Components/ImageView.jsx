@@ -1,6 +1,7 @@
 import React from "react";
 import { RiImageAddFill } from "react-icons/ri";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ImageView = ({ content, setContent }) => {
   let location = useLocation();
@@ -36,7 +37,7 @@ const ImageView = ({ content, setContent }) => {
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      console.error("Error downloading file:", error);
+      toast.error("Error :", error);
     }
   };
 

@@ -6,6 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     signOut(auth);
-    alert("Logout successfully !");
+    toast.success("Logout successfully !");
   };
 
   if (location.pathname === "/auth") return <></>;

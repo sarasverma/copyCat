@@ -9,13 +9,15 @@ import PageNotFound from "./pages/PageNotFound";
 import Fetch from "./pages/Fetch";
 import Navbar from "./Components/Navbar";
 import { AuthContext } from "./context/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
-      alert("Authenticate to continue");
+      toast.info("Authenticate to continue");
       return <Navigate to="/auth" />;
     }
     return children;
@@ -43,6 +45,19 @@ const App = () => {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };
