@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
-import Add from "./pages/Add";
+import Create from "./pages/Create";
 import About from "./pages/About";
 import Auth from "./pages/Auth";
 import PageNotFound from "./pages/PageNotFound";
@@ -31,10 +31,10 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route
             exact
-            path="/add"
+            path="/create"
             element={
               <ProtectedRoute>
-                <Add />
+                <Create />
               </ProtectedRoute>
             }
           />

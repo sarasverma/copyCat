@@ -5,7 +5,7 @@ const RadioButton = ({ type, setType }) => {
     <div className="types my-3 flex justify-center flex-wrap">
       <div
         className={`py-1 px-2 border-2  rounded-tl-md rounded-bl-md border-r-0 hover:bg-orange-500 cursor-pointer ${
-          type === "text" ? "bg-orange-500" : "bg-orange-300"
+          type === "text" ? "bg-orange-500 text-white" : "bg-orange-300"
         }`}
         onClick={() => {
           setType("text");
@@ -25,7 +25,7 @@ const RadioButton = ({ type, setType }) => {
 
       <div
         className={`py-1 px-2 border-2 border-r-0 hover:bg-orange-500 cursor-pointer ${
-          type === "image" ? "bg-orange-500" : "bg-orange-300"
+          type === "image" ? "bg-orange-500 text-white" : "bg-orange-300"
         }`}
         onClick={() => {
           setType("image");
@@ -45,7 +45,7 @@ const RadioButton = ({ type, setType }) => {
 
       <div
         className={`py-1 px-2 border-2 border-r-0 hover:bg-orange-500 cursor-pointer ${
-          type === "document" ? "bg-orange-500" : " bg-orange-300"
+          type === "document" ? "bg-orange-500 text-white" : " bg-orange-300"
         }`}
         onClick={() => {
           setType("document");
@@ -65,7 +65,7 @@ const RadioButton = ({ type, setType }) => {
 
       <div
         className={`py-1 px-2 border-2 rounded-tr-md rounded-br-md hover:bg-orange-500 cursor-pointer ${
-          type === "code" ? "bg-orange-500" : " bg-orange-300"
+          type === "code" ? "bg-orange-500 text-white" : " bg-orange-300"
         }`}
         onClick={() => {
           setType("code");

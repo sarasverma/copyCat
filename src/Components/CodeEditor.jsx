@@ -32,7 +32,7 @@ const CodeEditor = ({ content, setContent }) => {
     <div className="flex flex-col gap-2">
       <div className="options flex gap-2">
         <select
-          className="px-2 py-[2px]"
+          className="px-2 py-1 rounded-md"
           value={content.code.lang}
           onChange={(e) => {
             setLanguage(e.target.value);
@@ -50,7 +50,7 @@ const CodeEditor = ({ content, setContent }) => {
         </select>
 
         <select
-          className="px-2 py-[2px]"
+          className="px-2 py-1 rounded-md"
           onChange={(e) => {
             setTheme(e.target.value);
           }}
@@ -64,7 +64,7 @@ const CodeEditor = ({ content, setContent }) => {
       </div>
 
       <Editor
-        height="70vh"
+        height="70dvh"
         value={content.code.code}
         onChange={(v, e) => {
           setContent({ ...content, code: { ...content.code, code: v } });

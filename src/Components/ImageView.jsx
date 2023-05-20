@@ -9,6 +9,12 @@ const ImageView = ({ content, setContent }) => {
   const handleFileSelect = (event) => {
     const files = event.target.files;
 
+    // make it blank
+    setContent((prevContent) => ({
+      ...prevContent,
+      images: [],
+    }));
+
     Array.from(files).forEach((file) => {
       const reader = new FileReader();
 
@@ -68,7 +74,7 @@ const ImageView = ({ content, setContent }) => {
         {content.images.map((image, index) => {
           return (
             <div
-              className="flex flex-col gap-1 w-[100px] border border-cyan-600 rounded"
+              className="flex flex-col gap-1 w-[100px] border border-[white] rounded overflow-hidden"
               key={index}
               onClick={
                 location.pathname.includes("/fetch")

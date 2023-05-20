@@ -27,25 +27,31 @@ const Navbar = () => {
   if (location.pathname === "/auth") return <></>;
 
   return (
-    <nav className="flex justify-between items-center h-16 px-16 max-sm:px-8 sticky bg-slate-400 max-sm:z-50">
-      <div className="logo">
-        <img src={logo} alt="logo" className="w-8 aspect-square" />
+    <nav className="flex justify-between items-center h-16 px-16 max-sm:px-8 sticky bg-orange-500 z-50 text-white">
+      <div className="logo hover:scale-125">
+        <Link to="/">
+          <img
+            src={logo}
+            alt="logo"
+            className="w-8 aspect-square animate-bounce"
+          />
+        </Link>
       </div>
       <div
         ref={navLinks}
         className="nav-links max-sm:fixed max-sm:top-0 max-sm:left-0 max-sm:w-[100%] max-sm:h-[100%] max-sm:grid max-sm:place-items-center transition-[transform] duration-[0.5s] max-sm:translate-x-[-100vw] max-sm:bg-orange-500"
       >
         <ul className="flex gap-5 max-sm:flex-col max-sm:items-center max-sm:justify-center">
-          <li>
+          <li className="hover:scale-125">
             <Link
-              to="/add"
+              to="/create"
               onClick={handleCloseNav}
               className="max-sm:text-2xl"
             >
-              Add
+              Create
             </Link>
           </li>
-          <li>
+          <li className="hover:scale-125">
             <Link
               to="/fetch"
               onClick={handleCloseNav}
@@ -54,7 +60,7 @@ const Navbar = () => {
               Fetch
             </Link>
           </li>
-          <li>
+          <li className="hover:scale-125">
             <Link
               to="/about"
               onClick={handleCloseNav}
@@ -64,13 +70,13 @@ const Navbar = () => {
             </Link>
           </li>
           {currentUser === null ? (
-            <li>
+            <li className="hover:scale-125">
               <Link to="/auth" className="max-sm:text-2xl">
                 Login
               </Link>
             </li>
           ) : (
-            <li>
+            <li className="hover:scale-125">
               <button
                 onClick={() => {
                   handleSignOut();

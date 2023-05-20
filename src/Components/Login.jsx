@@ -26,7 +26,7 @@ const Login = ({ toogleForms }) => {
 
       setLoading(false);
       toast.success(`Welcome back ${user.displayName} 😊`);
-      navigate("/add");
+      navigate("/");
     } catch (e) {
       setLoading(false);
       toast.error(`Error authenticating user: ${e}`);

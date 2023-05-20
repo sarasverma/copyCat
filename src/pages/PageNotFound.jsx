@@ -14,7 +14,10 @@ const PageNotFound = () => {
           404 Page not Found
         </h1>
         <p className="text-center">
-          <Link to="/" className="text-3xl text-orange-500 underline ">
+          <Link
+            to="/"
+            className="text-3xl text-orange-500 underline animate-pulse"
+          >
             Main Page 😼
           </Link>
         </p>

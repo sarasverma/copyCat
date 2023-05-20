@@ -10,6 +10,7 @@ import DocView from "../Components/DocView";
 import CodeEditor from "../Components/CodeEditor";
 import { toast } from "react-toastify";
 import Loader from "../Components/Loader";
+import { ShapeContainer } from "../Components/Shapes";
 
 const Fetch = () => {
   const [record, setRecord] = useState({});
@@ -58,8 +59,9 @@ const FetchResult = ({ record, clipId, setRecord }) => {
 
     return (
       <>
-        <div className="mx-24 mt-12 p-2 max-md:mx-10 max-sm:mx-2 flex justify-center bg-red-200 rounded-md overflow-x-hidden">
-          <div className="w-full">
+        <div className="mx-24 mt-12 max-md:mx-10 max-sm:mx-2 flex flex-col items-center bg-orange-200 rounded-md overflow-x-hidden bg-gradient-to-br from-orange-200 to-orange-500">
+          <ShapeContainer />
+          <div className="w-full px-2 translate-y-[-69px] mb-[-60px]">
             <RadioButton type={type} setType={setType} />
             <div className="viewSelectedType">
               <ViewSelectedType

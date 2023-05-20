@@ -10,8 +10,9 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../Components/Loader";
+import { ShapeContainer } from "../Components/Shapes";
 
-const Add = ({}) => {
+const Create = ({}) => {
   const [type, setType] = useState("text");
   const [content, setContent] = useState({
     text: "",
@@ -44,8 +45,8 @@ const Add = ({}) => {
         if (images.length !== 0) {
           // upload images to storage
           imageUrls = await Promise.all(
-            images.map(async (image, index) => {
-              const imageRef = ref(storageRef, `imgs/img_${index}`);
+            images.map(async (image) => {
+              const imageRef = ref(storageRef, `imgs/${image.image.name}`);
               await uploadBytes(imageRef, image.image);
               return getDownloadURL(imageRef);
             })
@@ -55,8 +56,8 @@ const Add = ({}) => {
         if (documents.length !== 0) {
           // upload file to storage
           fileUrls = await Promise.all(
-            documents.map(async (document, index) => {
-              const documentRef = ref(storageRef, `docs/doc_${index}`);
+            documents.map(async (document) => {
+              const documentRef = ref(storageRef, `docs/${document.name}`);
               await uploadBytes(documentRef, document);
               return getDownloadURL(documentRef);
             })
@@ -88,8 +89,9 @@ const Add = ({}) => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="mx-24 mt-12 p-2 max-md:mx-10 max-sm:mx-2 flex justify-center bg-red-200 rounded-md overflow-x-hidden">
-          <div className="w-full">
+        <div className="mx-24 mt-12 max-md:mx-10 max-sm:mx-2 flex flex-col items-center bg-orange-200 rounded-md overflow-x-hidden bg-gradient-to-br from-orange-200 to-orange-500">
+          <ShapeContainer />
+          <div className="w-full px-2 translate-y-[-69px] mb-[-60px]">
             <RadioButton type={type} setType={setType} />
 
             <form
@@ -101,8 +103,8 @@ const Add = ({}) => {
             >
               <input
                 type="text"
-                placeholder="clipId"
-                className="px-1 rounded-xl"
+                placeholder="Clip Id"
+                className="px-1.5 py-1 focus:border-2 border-orange-500 outline-none placeholder:text-stone rounded-md"
                 onChange={(e) => {
                   setClipId(e.target.value);
                 }}
@@ -110,7 +112,7 @@ const Add = ({}) => {
               />
               <button
                 type="submit"
-                className="px-2.5 py-1.5 bg-orange-500 rounded-xl"
+                className="px-2.5 py-1.5 bg-orange-500 rounded-md text-white"
               >
                 Submit
               </button>
@@ -142,4 +144,4 @@ const ViewSelectedType = ({ type, content, setContent }) => {
   else return <div>Error</div>;
 };
 
-export default Add;
+export default Create;

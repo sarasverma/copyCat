@@ -8,6 +8,13 @@ const DocView = ({ content, setContent }) => {
 
   const handleFileSelect = (event) => {
     const files = event.target.files;
+
+    //make it blank
+    setContent((prevContent) => ({
+      ...prevContent,
+      documents: [],
+    }));
+
     Array.from(files).forEach((file) => {
       setContent((prevContent) => ({
         ...prevContent,
@@ -58,7 +65,7 @@ const DocView = ({ content, setContent }) => {
       <div className="flex gap-2 flex-wrap items-center justify-center">
         {content.documents.map((document, index) => (
           <div
-            className="flex flex-col gap-1 w-[100px] items-center border border-cyan-600 rounded"
+            className="flex flex-col gap-1 w-[100px] items-center border border-[white] rounded overflow-hidden"
             key={index}
             onClick={
               location.pathname.includes("/fetch")
@@ -69,7 +76,7 @@ const DocView = ({ content, setContent }) => {
                 : () => {}
             }
           >
-            <AiFillFile className="text-3xl" />
+            <AiFillFile className="text-6xl" />
             <p>
               {location.pathname.includes("/fetch")
                 ? `doc_${index}`

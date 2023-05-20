@@ -46,7 +46,7 @@ const Register = ({ toogleForms }) => {
       });
 
       toast.success(`Welcome ${user.displayName} 😊.`);
-      navigate("/add");
+      navigate("/");
     } catch (e) {
       toast.error(`Error : ${e}`);
     }
