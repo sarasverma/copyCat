@@ -1,7 +1,10 @@
 import React from "react";
 import { RiImageAddFill } from "react-icons/ri";
+import { useLocation } from "react-router-dom";
 
 const ImageView = ({ content, setContent }) => {
+  let location = useLocation();
+
   const handleFileSelect = (event) => {
     const files = event.target.files;
 
@@ -22,26 +25,43 @@ const ImageView = ({ content, setContent }) => {
     });
   };
 
+  const handleDownload = async (url, name) => {
+    try {
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "");
+      link.setAttribute("target", "_blank");
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading file:", error);
+    }
+  };
+
   return (
     <div
       className="text-center flex flex-col items-center justify-center gap-2"
       onClick={() => {}}
     >
-      <div className="py-2">
-        <label htmlFor="images" className="flex items-center gap-1 text-xl">
-          <RiImageAddFill />
-          Add Images
-        </label>
-        <input
-          type="file"
-          id="images"
-          name="images"
-          accept="image/png, image/jpeg"
-          multiple
-          className="hidden"
-          onChange={handleFileSelect}
-        />
-      </div>
+      {!location.pathname.includes("/fetch") && (
+        <div className="addImage py-2">
+          <label htmlFor="images" className="flex items-center gap-1 text-xl">
+            <RiImageAddFill />
+            Add Images
+          </label>
+          <input
+            type="file"
+            id="images"
+            name="images"
+            accept="image/png, image/jpeg"
+            multiple
+            className="hidden"
+            onChange={handleFileSelect}
+          />
+        </div>
+      )}
 
       <div className="flex gap-2 flex-wrap items-center justify-center">
         {content.images.map((image, index) => {
@@ -49,13 +69,31 @@ const ImageView = ({ content, setContent }) => {
             <div
               className="flex flex-col gap-1 w-[100px] border border-cyan-600 rounded"
               key={index}
+              onClick={
+                location.pathname.includes("/fetch")
+                  ? (e) => {
+                      e.preventDefault();
+                      handleDownload(image);
+                    }
+                  : () => {}
+              }
             >
               <img
-                src={image.thumbnail}
-                alt={image.image.name}
+                src={
+                  location.pathname.includes("/fetch") ? image : image.thumbnail
+                }
+                alt={
+                  location.pathname.includes("/fetch")
+                    ? `img_${index}`
+                    : image.image.name
+                }
                 className="aspect-square w-full"
               />
-              <p>{image.image.name?.substr(0, 10)}</p>
+              <p>
+                {location.pathname.includes("/fetch")
+                  ? `img_${index}`
+                  : image.image.name?.substr(0, 10)}
+              </p>
             </div>
           );
         })}

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
+import Add from "./pages/Add";
 import About from "./pages/About";
 import Auth from "./pages/Auth";
 import PageNotFound from "./pages/PageNotFound";
@@ -14,6 +15,7 @@ const App = () => {
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
+      alert("Authenticate to continue");
       return <Navigate to="/auth" />;
     }
     return children;
@@ -24,12 +26,13 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route exact path="/" element={<Home />} />
           <Route
             exact
-            path="/"
+            path="/add"
             element={
               <ProtectedRoute>
-                <Home />
+                <Add />
               </ProtectedRoute>
             }
           />

@@ -33,6 +33,7 @@ const CodeEditor = ({ content, setContent }) => {
       <div className="options flex gap-2">
         <select
           className="px-2 py-[2px]"
+          value={content.code.lang}
           onChange={(e) => {
             setLanguage(e.target.value);
             setContent({
@@ -64,7 +65,7 @@ const CodeEditor = ({ content, setContent }) => {
 
       <Editor
         height="70vh"
-        defaultValue="// put your code here"
+        value={content.code.code}
         onChange={(v, e) => {
           setContent({ ...content, code: { ...content.code, code: v } });
         }}

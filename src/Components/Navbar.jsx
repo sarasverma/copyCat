@@ -36,7 +36,11 @@ const Navbar = () => {
       >
         <ul className="flex gap-5 max-sm:flex-col max-sm:items-center max-sm:justify-center">
           <li>
-            <Link to="/" onClick={handleCloseNav} className="max-sm:text-2xl">
+            <Link
+              to="/add"
+              onClick={handleCloseNav}
+              className="max-sm:text-2xl"
+            >
               Add
             </Link>
           </li>

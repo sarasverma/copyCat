@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { FaUser } from 'react-icons/fa';
-import { SiMinutemailer } from 'react-icons/si';
-import { TbPassword } from 'react-icons/tb';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth, db } from '../firebase';
-import { doc, setDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { FaUser } from "react-icons/fa";
+import { SiMinutemailer } from "react-icons/si";
+import { TbPassword } from "react-icons/tb";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Register = ({ toogleForms }) => {
   const navigate = useNavigate();
   const [registerInfo, setRegisterInfo] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
   });
 
   const onChangeRegister = (e) => {
@@ -36,14 +36,14 @@ const Register = ({ toogleForms }) => {
       });
 
       // userInfo
-      await setDoc(doc(db, 'userInfo', email), {
+      await setDoc(doc(db, "userInfo", email), {
         email,
         name,
         storages: [],
       });
 
       alert(`Welcome ${user.displayName} 😊.`);
-      navigate('/');
+      navigate("/add");
     } catch (e) {
       console.log(`Error : ${e}`);
     }
@@ -52,7 +52,8 @@ const Register = ({ toogleForms }) => {
   return (
     <form
       onSubmit={handleRegister}
-      className="py-10 px-5 w-[500px] flex flex-col gap-6 rounded-xl max-sm:w-[100%] text-white text-xl bg-orange-200  bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-100">
+      className="py-10 px-5 w-[500px] flex flex-col gap-6 rounded-xl max-sm:w-[100%] text-white text-xl bg-orange-200  bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border border-gray-100"
+    >
       <div className="info text-center">
         <h1 className="text-center">Welcome 😼</h1>
         <p className="text-sm">
@@ -62,7 +63,8 @@ const Register = ({ toogleForms }) => {
             onClick={(e) => {
               e.preventDefault();
               toogleForms();
-            }}>
+            }}
+          >
             Login
           </button>
         </p>
