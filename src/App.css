@@ -16,6 +16,10 @@
     background: rgb(15, 15, 15); 
 }
 
+#root{
+    overflow: hidden;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

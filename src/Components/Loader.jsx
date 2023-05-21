@@ -7,7 +7,7 @@ const Loader = ({ loading }) => {
       <PacmanLoader
         color="#fb923c"
         loading={loading}
-        size={90}
+        size={70}
         aria-label="Loading Spinner"
         data-testid="loader"
         className="mt-4"
