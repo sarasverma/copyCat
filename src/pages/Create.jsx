@@ -38,6 +38,7 @@ const Create = ({}) => {
       // check clipid already exist
       const res = await getDoc(doc(db, "tempStorage", clipId));
       if (res.exists()) {
+        setLoading(false);
         toast.error("This clipId already exists 🙀");
       } else {
         const storageRef = ref(storage, clipId);
